@@ -17,7 +17,7 @@ Download manager
 		reint_file_timestamp
 
 	:Version:
-		1.0.0
+		1.0.1
 
 	:Language:
 		en

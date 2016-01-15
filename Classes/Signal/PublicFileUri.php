@@ -31,11 +31,10 @@ use TYPO3\CMS\Core\Resource\Exception\InvalidTargetFolderException;
 use TYPO3\CMS\Core\Resource\Index\FileIndexRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\PathUtility;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * hooks the public file uri function
- * 
- * @param $t
  * 
  */
 class PublicFileUri {
@@ -62,21 +61,23 @@ class PublicFileUri {
 
 			// check if TYPO3 is in frontend mode
 			if (TYPO3_MODE === 'FE') {
-				$newPublicUrl = rawurldecode($driver->getPublicUrl($fileData['identifier'] . '?v=' . $fileData['modDate']));
+				$newPublicUrl = $driver->getPublicUrl($fileData['identifier']);
+				//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($newPublicUrl);
+				//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($newPublicUrl);
 			}
 
 			// check if TYPO3 is in backend mode and make the path relative to the current script 
 			// in order to make it possible to use the relative file
 			if (TYPO3_MODE === 'BE' && $relativeToCurrentScript) {
-				$publicUrl = rawurldecode($driver->getPublicUrl($fileData['identifier']));
+				$publicUrl = $driver->getPublicUrl($fileData['identifier']);
 				$absolutePathToContainingFolder = PathUtility::dirname(PATH_site . $publicUrl);
 				$pathPart = PathUtility::getRelativePathTo($absolutePathToContainingFolder);
 				$filePart = substr(PATH_site . $publicUrl, strlen($absolutePathToContainingFolder) + 1);
-				$newPublicUrl = $pathPart . $filePart . '?v=' . $fileData['modDate'];
+				$newPublicUrl = $pathPart . $filePart;
 			}
-			
-			if(!empty($newPublicUrl)){
-				$urlData['publicUrl'] = $newPublicUrl;
+
+			if (!empty($newPublicUrl) && !empty($fileData['modDate'])) {
+				$urlData['publicUrl'] = $newPublicUrl . '?v=' . $fileData['modDate'];
 			}
 		}
 	}
