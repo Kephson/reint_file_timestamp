@@ -74,9 +74,6 @@ ephraim.haerer@renolit.com, via `Twitter <https://twitter.com/MeisterE>`_, via `
 For problems my preferred contact channel is to create an issue on `Github <https://github.com/Kephson/reint_file_timestamp/issues>`_.
 
 
-What doesn't it do?
----------------------
-
-**The extension doesn't modify the file as itself, it only modifies the public URL of the file when the URL is asked for.**
-
-**The extension doesn't modify the public URL if a file is processed through the image processor via TYPO3. A timestamp for processed URLs isn't needed.**
+**It will NOT:**
+  - modify the file as itself, it only modifies the public URL of the file when the URL is asked for.
+  - modify the public URL if a file is processed through the image processor via TYPO3. A timestamp for processed URLs isn't needed.

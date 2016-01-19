@@ -11,6 +11,12 @@
 ChangeLog
 =========
 
+- **19.01.2016** -> 1.0.3
+
+  - small documentation update
+
+-----------------------------------
+
 - **18.01.2016** -> 1.0.2
 
   - small documentation update
