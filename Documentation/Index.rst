@@ -8,7 +8,7 @@
 .. _start:
 
 =============================================================
-Download manager
+Timestamp in public file uri
 =============================================================
 
 .. only:: html
@@ -17,16 +17,16 @@ Download manager
 		reint_file_timestamp
 
 	:Version:
-		1.0.3
+		1.0.4
 
 	:Language:
 		en
 
 	:Description:
-		A simple TYPO3 download manager with different views of file collections as downloadable lists.
+		Adds a parameter with timestamp to all public file uri to prevent browser from caching the file after update.
 
 	:Keywords:
-		FAL,file,download,timestamp,caching,parameter,filelist
+		FAL,file,download,timestamp,caching,parameter,filelist,browser,filecache,Hook,signal,Slot
 
 	:Copyright:
 		2016
