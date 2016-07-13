@@ -40,6 +40,20 @@ use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 class PublicFileUri {
 
 	/**
+	 * extension key
+	 * 
+	 * @var string
+	 */
+	protected $extKey = 'reint_file_timestamp';
+
+	/**
+	 * settings in extension manager
+	 * 
+	 * @var array
+	 */
+	protected $emSettings;
+
+	/**
 	 * signal slot for public url generation of a file
 	 * @see \TYPO3\CMS\Core\Resource\ResourceStorage and the function getPublicUrl
 	 * 
@@ -53,30 +67,63 @@ class PublicFileUri {
 	 */
 	public function preGeneratePublicUrl($t, $driver, $resourceObject, $relativeToCurrentScript, $urlData) {
 
+		$this->emSettings = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$this->extKey]);
+
 		// check if resource is file
 		if (is_a($resourceObject, 'TYPO3\CMS\Core\Resource\File')) {
 
 			$fileData = $this->getFileData($resourceObject);
 			$newPublicUrl = '';
 
+			$enable = true;
+
 			// check if TYPO3 is in frontend mode
 			if (TYPO3_MODE === 'FE') {
-				$newPublicUrl = $driver->getPublicUrl($fileData['identifier']);
-				//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($newPublicUrl);
-				//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($newPublicUrl);
+				if ($this->emSettings['disable_fe']) {
+					$enable = false;
+				} else {
+					// check filetypes field
+					if (!empty($this->emSettings['filetypes_fe'])) {
+						$filetypes = explode(',', $this->emSettings['filetypes_fe']);
+						if (in_array($fileData['extension'], $filetypes)) {
+							
+						} else {
+							$enable = false;
+						}
+					}
+					if ($enable) {
+						$newPublicUrl = $driver->getPublicUrl($fileData['identifier']);
+					}
+				}
 			}
 
 			// check if TYPO3 is in backend mode and make the path relative to the current script 
 			// in order to make it possible to use the relative file
 			if (TYPO3_MODE === 'BE' && $relativeToCurrentScript) {
-				$publicUrl = $driver->getPublicUrl($fileData['identifier']);
-				$absolutePathToContainingFolder = PathUtility::dirname(PATH_site . $publicUrl);
-				$pathPart = PathUtility::getRelativePathTo($absolutePathToContainingFolder);
-				$filePart = substr(PATH_site . $publicUrl, strlen($absolutePathToContainingFolder) + 1);
-				$newPublicUrl = $pathPart . $filePart;
+				//DebuggerUtility::var_dump($this->emSettings);
+				if ($this->emSettings['disable_be']) {
+					$enable = false;
+				} else {
+					// check filetypes field
+					if (!empty($this->emSettings['filetypes_be'])) {
+						$filetypes = explode(',', $this->emSettings['filetypes_be']);
+						if (in_array($fileData['extension'], $filetypes)) {
+							
+						} else {
+							$enable = false;
+						}
+					}
+					if ($enable) {
+						$publicUrl = $driver->getPublicUrl($fileData['identifier']);
+						$absolutePathToContainingFolder = PathUtility::dirname(PATH_site . $publicUrl);
+						$pathPart = PathUtility::getRelativePathTo($absolutePathToContainingFolder);
+						$filePart = substr(PATH_site . $publicUrl, strlen($absolutePathToContainingFolder) + 1);
+						$newPublicUrl = $pathPart . $filePart;
+					}
+				}
 			}
 
-			if (!empty($newPublicUrl) && !empty($fileData['modDate'])) {
+			if (!empty($newPublicUrl) && !empty($fileData['modDate']) && $enable) {
 				$urlData['publicUrl'] = $newPublicUrl . '?v=' . $fileData['modDate'];
 			}
 		}
@@ -94,6 +141,7 @@ class PublicFileUri {
 		$fileData = array(
 			'identifier' => $resourceObject->getIdentifier(),
 			'modDate' => $resourceObject->_getPropertyRaw('modification_date'),
+			'extension' => $resourceObject->getExtension(),
 		);
 
 		return $fileData;

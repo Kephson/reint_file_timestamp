@@ -11,6 +11,12 @@
 ChangeLog
 =========
 
+- **13.07.2016** -> 1.1.0
+
+  - added configuration options in extension manager
+
+-----------------------------------
+
 - **19.01.2016** -> 1.0.3, 1.0.4
 
   - small documentation update

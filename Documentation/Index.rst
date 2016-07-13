@@ -17,7 +17,7 @@ Timestamp in public file uri
 		reint_file_timestamp
 
 	:Version:
-		1.0.4
+		1.1.0
 
 	:Language:
 		en
