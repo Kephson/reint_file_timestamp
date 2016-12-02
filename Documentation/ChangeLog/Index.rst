@@ -11,6 +11,12 @@
 ChangeLog
 =========
 
+- **02.12.2016** -> 1.1.1
+
+  - added check for public storage, only change public uri if file is public available
+
+-----------------------------------
+
 - **13.07.2016** -> 1.1.0
 
   - added configuration options in extension manager

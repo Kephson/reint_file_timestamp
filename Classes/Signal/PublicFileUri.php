@@ -26,7 +26,6 @@ namespace RENOLIT\ReintFileTimestamp\Signal;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
-
 use TYPO3\CMS\Core\Resource\Exception\InvalidTargetFolderException;
 use TYPO3\CMS\Core\Resource\Index\FileIndexRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -37,7 +36,8 @@ use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
  * hooks the public file uri function
  * 
  */
-class PublicFileUri {
+class PublicFileUri
+{
 
 	/**
 	 * extension key
@@ -65,7 +65,8 @@ class PublicFileUri {
 	 * 
 	 * @return void
 	 */
-	public function preGeneratePublicUrl($t, $driver, $resourceObject, $relativeToCurrentScript, $urlData) {
+	public function preGeneratePublicUrl($t, $driver, $resourceObject, $relativeToCurrentScript, $urlData)
+	{
 
 		$this->emSettings = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$this->extKey]);
 
@@ -77,8 +78,13 @@ class PublicFileUri {
 
 			$enable = true;
 
+			$storage = $resourceObject->getStorage();
+			if (!$storage->isPublic()) {
+				$enable = false;
+			}
+
 			// check if TYPO3 is in frontend mode
-			if (TYPO3_MODE === 'FE') {
+			if ($enable && TYPO3_MODE === 'FE') {
 				if ($this->emSettings['disable_fe']) {
 					$enable = false;
 				} else {
@@ -99,7 +105,7 @@ class PublicFileUri {
 
 			// check if TYPO3 is in backend mode and make the path relative to the current script 
 			// in order to make it possible to use the relative file
-			if (TYPO3_MODE === 'BE' && $relativeToCurrentScript) {
+			if ($enable && TYPO3_MODE === 'BE' && $relativeToCurrentScript) {
 				//DebuggerUtility::var_dump($this->emSettings);
 				if ($this->emSettings['disable_be']) {
 					$enable = false;
@@ -136,7 +142,8 @@ class PublicFileUri {
 	 * 
 	 * @return array
 	 */
-	protected function getFileData($resourceObject) {
+	protected function getFileData($resourceObject)
+	{
 
 		$fileData = array(
 			'identifier' => $resourceObject->getIdentifier(),
@@ -146,5 +153,4 @@ class PublicFileUri {
 
 		return $fileData;
 	}
-
 }
