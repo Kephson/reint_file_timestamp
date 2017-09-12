@@ -1,12 +1,12 @@
 {
-	"name": "renolit/reint-downloadmanager",
+	"name": "renolit/reint-file-timestamp",
 	"type": "typo3-cms-extension",
 	"description": "Timestamp parameter in public file uri",
 	"homepage": "https://github.com/Kephson/reint_file_timestamp",
 	"license": "GPL-2.0+",
 	"keywords": ["TYPO3 CMS"],
 	"require": {
-		"typo3/cms-core": "^7.6.0"
+		"typo3/cms-core": "^7.6.0 || >=8.5.0 <9"
 	},
 	"autoload": {
 		"psr-4": {

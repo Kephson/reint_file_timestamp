@@ -11,6 +11,12 @@
 ChangeLog
 =========
 
+- **12.09.2017** -> 1.1.3
+
+  - fixed composer.json
+
+-----------------------------------
+
 - **12.09.2017** -> 1.1.2
 
   - added composer.json and updated dependencies
