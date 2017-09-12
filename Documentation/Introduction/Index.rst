@@ -23,6 +23,9 @@ It adds a timestamp parameter to all file downloads and direct links in backend 
 
 It could be helpful for Intranet systems or systems with many changes in file downloads.
 
+It is useful for content publisher in TYPO3 because some browsers cache the files extremely and after updating 
+the file in TYPO3 the changes can't bee seen.
+
 Example of a usecase with problems: 
   - Editor opens pdf-file in frontend in Internet Explorer -> browser is caching this file
   - Editor replaces the file in TYPO3 backend with a new file with the replace function in filelist module

@@ -6,7 +6,7 @@ namespace RENOLIT\ReintFileTimestamp\Signal;
  *
  *  Copyright notice
  *
- *  (c) 2016 Ephraim Härer <ephraim.haerer@renolit.com>, RENOLIT SE
+ *  (c) 2016-2017 Ephraim Härer <ephraim.haerer@renolit.com>, RENOLIT SE
  *
  *  All rights reserved
  *

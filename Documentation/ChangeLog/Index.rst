@@ -11,6 +11,12 @@
 ChangeLog
 =========
 
+- **12.09.2017** -> 1.1.2
+
+  - added composer.json and updated dependencies
+
+-----------------------------------
+
 - **02.12.2016** -> 1.1.1
 
   - added check for public storage, only change public uri if file is public available

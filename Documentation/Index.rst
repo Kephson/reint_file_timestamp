@@ -17,7 +17,7 @@ Timestamp in public file uri
 		reint_file_timestamp
 
 	:Version:
-		1.1.1
+		release
 
 	:Language:
 		en
@@ -29,7 +29,7 @@ Timestamp in public file uri
 		FAL,file,download,timestamp,caching,parameter,filelist,browser,filecache,Hook,signal,Slot
 
 	:Copyright:
-		2016
+		2016-2017
 
 	:Author:
 		Ephraim Härer
