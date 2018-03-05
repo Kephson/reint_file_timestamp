@@ -11,6 +11,12 @@
 ChangeLog
 =========
 
+- **13.09.2017** -> 1.1.4
+
+  - fixed composer.json and added TYPO3 8 compatibility
+
+-----------------------------------
+
 - **12.09.2017** -> 1.1.3
 
   - fixed composer.json
