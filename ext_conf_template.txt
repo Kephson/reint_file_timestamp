@@ -1,8 +1,8 @@
 # cat=basic; type=boolean; label=Disable adding of timestamp to file links in frontend
 disable_fe = 0
 # cat=basic; type=string; label=Filetypes comma separated for adding of timestamp in frontend
-filetypes_fe = 
+filetypes_fe = docx,doc,pdf,xls,xlsx,odt,ods,ppt,pptx
 # cat=basic; type=boolean; label=Disable adding of timestamp to file links in backend
 disable_be = 0
 # cat=basic; type=string; label=Filetypes comma separated for adding of timestamp in backend
-filetypes_be = 
+filetypes_be =

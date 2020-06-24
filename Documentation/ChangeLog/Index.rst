@@ -11,6 +11,12 @@
 ChangeLog
 =========
 
+- **24.06.2020** -> 2.0.0
+
+  - new version for TYPO3 9.5 and 10.4
+
+-----------------------------------
+
 - **13.09.2017** -> 1.1.4
 
   - fixed composer.json and added TYPO3 8 compatibility

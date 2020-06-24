@@ -7,32 +7,24 @@
  * writing. "version" and "dependencies" must not be touched!
  * ************************************************************* */
 
-$EM_CONF[$_EXTKEY] = array(
-	'title' => 'Timestamp parameter in public file uri',
-	'description' => 'Adds a parameter with the timestamp of last change to all public file uri to prevent browser from caching the file after update.',
-	'category' => 'misc',
-	'author' => 'Ephraim Härer',
-	'author_email' => 'ephraim.haerer@renolit.com',
-	'author_company' => 'RENOLIT SE',
-	'state' => 'stable',
-	'uploadfolder' => false,
-	'createDirs' => '',
-	'clearCacheOnLoad' => 0,
-	'version' => '1.1.4',
-	'constraints' =>
-	array(
-		'depends' =>
-		array(
-			'typo3' => '6.2.4-8.7.99',
-			'php' => '5.5.0-7.1.99',
-		),
-		'conflicts' =>
-		array(
-		),
-		'suggests' =>
-		array(
-		),
-	),
-	'clearcacheonload' => false,
-);
+$EM_CONF[$_EXTKEY] = [
+    'title' => 'Timestamp parameter in public file uri',
+    'description' => 'Adds a parameter with the timestamp of last change to all public file uri to prevent browser from caching the file after update.',
+    'version' => '2.0.0',
+    'category' => 'misc',
+    'constraints' => [
+        'depends' => [
+            'typo3' => '9.5.17-10.4.99',
+            'php' => '7.1.0-7.4.99',
+        ],
+        'conflicts' => [],
+        'suggests' => [],
+    ],
+    'state' => 'stable',
+    'uploadfolder' => false,
+    'clearCacheOnLoad' => false,
+    'author' => 'Ephraim Härer',
+    'author_email' => 'ephraim.haerer@renolit.com',
+    'author_company' => 'RENOLIT SE',
+];
 

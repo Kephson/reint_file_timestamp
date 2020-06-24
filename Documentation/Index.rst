@@ -29,7 +29,7 @@ Timestamp in public file uri
 		FAL,file,download,timestamp,caching,parameter,filelist,browser,filecache,Hook,signal,Slot
 
 	:Copyright:
-		2016-2017
+		2016-2020
 
 	:Author:
 		Ephraim Härer
