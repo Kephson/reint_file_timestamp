@@ -54,4 +54,4 @@ FAQ
 What to do if I have problems with this extension?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Please write a bug report on `Github <https://github.com/Kephson/reint_file_timestamp/issues>`_ and report the problem
-to the owner of this extension.
+via Github to me.
