@@ -34,7 +34,15 @@ To install the extension, perform the following steps:
 Configuration
 -------------
 
-#. Configure the extension via "Admin tools->Settings->Extension configuration->reint_filetimestamp"
+#. Configure the extension via "Admin tools->Settings->Extension configuration->reint_file_timestamp"
+
+
+.. figure:: ../Images/Administrator/extensionconfiguration.jpg
+   :alt: Extension configuration
+
+   Extension configuration
+
+   Extension configuration in admin tools
 
 
 
