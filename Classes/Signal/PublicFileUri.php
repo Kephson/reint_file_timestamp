@@ -27,14 +27,19 @@ namespace RENOLIT\ReintFileTimestamp\Signal;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
 
+use \TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationExtensionNotConfiguredException;
+use \TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationPathDoesNotExistException;
 use \TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use \TYPO3\CMS\Core\Core\Environment;
+use \TYPO3\CMS\Core\Resource\Driver\LocalDriver;
+use \TYPO3\CMS\Core\Resource\Exception;
+use \TYPO3\CMS\Core\Resource\ResourceStorage;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
 use \TYPO3\CMS\Core\Utility\PathUtility;
 use \TYPO3\CMS\Core\Resource\File;
 
 /**
- * hooks the public file uri function
+ * hooks into the public file uri generating
  */
 class PublicFileUri
 {
@@ -47,7 +52,7 @@ class PublicFileUri
     protected $extKey = 'reint_file_timestamp';
 
     /**
-     * settings in extension manager
+     * settings in extension configuration
      *
      * @var array
      */
@@ -56,13 +61,16 @@ class PublicFileUri
     /**
      * signal slot for public url generation of a file
      *
-     * @param \TYPO3\CMS\Core\Resource\ResourceStorage $t
-     * @param \TYPO3\CMS\Core\Resource\Driver\LocalDriver $driver
+     * @param ResourceStorage $t
+     * @param LocalDriver $driver
      * @param object $resourceObject e.g. \TYPO3\CMS\Core\Resource\File, \TYPO3\CMS\Core\Resource\Folder, \TYPO3\CMS\Core\Resource\ProcessedFile
-     * @param boolean $relativeToCurrentScript
+     * @param bool $relativeToCurrentScript
      * @param array $urlData
      * @return void
-     * @see \TYPO3\CMS\Core\Resource\ResourceStorage and the function getPublicUrl
+     * @throws ExtensionConfigurationExtensionNotConfiguredException
+     * @throws ExtensionConfigurationPathDoesNotExistException
+     * @throws Exception
+     * @see ResourceStorage and the function getPublicUrl
      */
     public function preGeneratePublicUrl($t, $driver, $resourceObject, $relativeToCurrentScript, $urlData)
     {
@@ -88,10 +96,10 @@ class PublicFileUri
                 if ($this->emSettings['disable_fe']) {
                     $enable = false;
                 } else {
-                    // check filetypes field
+                    /* check fileTypes field */
                     if (!empty($this->emSettings['filetypes_fe'])) {
-                        $filetypes = explode(',', $this->emSettings['filetypes_fe']);
-                        if (!in_array($fileData['extension'], $filetypes, true)) {
+                        $fileTypes = explode(',', $this->emSettings['filetypes_fe']);
+                        if (!in_array($fileData['extension'], $fileTypes, true)) {
                             $enable = false;
                         }
                     }
@@ -107,10 +115,10 @@ class PublicFileUri
                 if ($this->emSettings['disable_be']) {
                     $enable = false;
                 } else {
-                    /* check filetypes field */
+                    /* check fileTypes field */
                     if (!empty($this->emSettings['filetypes_be'])) {
-                        $filetypes = explode(',', $this->emSettings['filetypes_be']);
-                        if (!in_array($fileData['extension'], $filetypes, true)) {
+                        $fileTypes = explode(',', $this->emSettings['filetypes_be']);
+                        if (!in_array($fileData['extension'], $fileTypes, true)) {
                             $enable = false;
                         }
                     }
@@ -118,14 +126,19 @@ class PublicFileUri
                         $publicUrl = $driver->getPublicUrl($fileData['identifier']);
                         $absolutePathToContainingFolder = PathUtility::dirname(Environment::getPublicPath() . '/' . $publicUrl);
                         $pathPart = PathUtility::getRelativePathTo($absolutePathToContainingFolder);
-                        $filePart = substr(Environment::getPublicPath() . '/' . $publicUrl, strlen($absolutePathToContainingFolder) + 1);
+                        $filePart = substr(Environment::getPublicPath() . '/' . $publicUrl,
+                            strlen($absolutePathToContainingFolder) + 1);
                         $newPublicUrl = $pathPart . $filePart;
                     }
                 }
             }
 
             if (!empty($newPublicUrl) && !empty($fileData['modDate']) && $enable) {
-                $urlData['publicUrl'] = $newPublicUrl . '?v=' . $fileData['modDate'];
+                if (strpos($newPublicUrl, '?') === false) {
+                    $urlData['publicUrl'] = $newPublicUrl . '?v=' . $fileData['modDate'];
+                } else {
+                    $urlData['publicUrl'] = $newPublicUrl . '&v=' . $fileData['modDate'];
+                }
             }
         }
     }
@@ -136,15 +149,12 @@ class PublicFileUri
      * @param File $resourceObject
      * @return array
      */
-    protected function getFileData($resourceObject)
+    protected function getFileData($resourceObject): array
     {
-
-        $fileData = array(
+        return [
             'identifier' => $resourceObject->getIdentifier(),
             'modDate' => $resourceObject->_getPropertyRaw('modification_date'),
             'extension' => $resourceObject->getExtension(),
-        );
-
-        return $fileData;
+        ];
     }
 }

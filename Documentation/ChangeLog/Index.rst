@@ -11,6 +11,13 @@
 ChangeLog
 =========
 
+- **25.06.2020** -> 2.0.1
+
+  - cleaned up coding
+  - added check if public url still contains a parameter in uri
+
+-----------------------------------
+
 - **24.06.2020** -> 2.0.0
 
   - new version for TYPO3 9.5 and 10.4
