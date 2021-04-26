@@ -16,7 +16,7 @@
   ],
   "homepage": "https://github.com/Kephson/reint_file_timestamp",
   "readme": "README.md",
-  "license": "GPL-2.0-only / GPL-2.0-or-later",
+  "license": "GPL-2.0-or-later",
   "authors": [
     {
       "name": "Ephraim Härer",
@@ -31,12 +31,17 @@
     "source": "https://github.com/Kephson/reint_file_timestamp/archive/master.zip"
   },
   "require": {
-    "typo3/cms-core": "^9.5.17 || ^10.4.3",
+    "typo3/cms-core": "^9.5.25 || ^10.4.14",
     "php": "^7.1"
   },
   "autoload": {
     "psr-4": {
       "RENOLIT\\ReintFileTimestamp\\": "Classes"
+    }
+  },
+  "extra": {
+    "typo3/cms": {
+      "extension-key": "reint_file_timestamp"
     }
   }
 }

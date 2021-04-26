@@ -1,4 +1,6 @@
 <?php
+/** @noinspection PhpUndefinedVariableInspection */
+
 /* * *************************************************************
  * Extension Manager/Repository config file for ext "reint_file_timestamp".
  *
@@ -10,7 +12,7 @@
 $EM_CONF[$_EXTKEY] = [
     'title' => 'Timestamp parameter in public file uri',
     'description' => 'Adds a parameter with the timestamp of last change to all public file uri to prevent browser from caching the file after update.',
-    'version' => '2.0.1',
+    'version' => '2.0.2',
     'category' => 'misc',
     'constraints' => [
         'depends' => [
