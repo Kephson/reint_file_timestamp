@@ -73,40 +73,25 @@ class PublicFileUriListener
             if (!$storage->isPublic()) {
                 return;
             }
+            $driver = $event->getDriver();
+            $publicUrl = $driver->getPublicUrl($fileData['identifier']);
             /* check if TYPO3 is in frontend mode and check fileTypes field */
-            if (!$this->emSettings['disable_fe'] && !empty($this->emSettings['filetypes_fe']) &&
+            if ($publicUrl && !$this->emSettings['disable_fe'] &&
                 ($GLOBALS['TYPO3_REQUEST'] ?? null) instanceof ServerRequestInterface &&
                 ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isFrontend()) {
-                $fileTypes = explode(',', $this->emSettings['filetypes_fe']);
-                if (in_array($fileData['extension'], $fileTypes, true)) {
-                    $this->manipulatePublicUri($event, $fileData);
+                $newPublicUrl = $this->generateNewPublicUri($this->emSettings['filetypes_fe'], $fileData, $publicUrl);
+                if (!empty($newPublicUrl)) {
+                    $event->setPublicUrl($newPublicUrl);
                 }
             }
             /* check if TYPO3 is in backend mode and check fileTypes field */
-            if (!$this->emSettings['disable_be'] && !empty($this->emSettings['filetypes_be']) &&
+            if ($publicUrl && !$this->emSettings['disable_be'] &&
                 ($GLOBALS['TYPO3_REQUEST'] ?? null) instanceof ServerRequestInterface &&
                 ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isBackend()) {
-                $fileTypes = explode(',', $this->emSettings['filetypes_be']);
-                if (in_array($fileData['extension'], $fileTypes, true)) {
-                    $this->manipulatePublicUri($event, $fileData);
+                $newPublicUrl = $this->generateNewPublicUri($this->emSettings['filetypes_be'], $fileData, $publicUrl);
+                if (!empty($newPublicUrl)) {
+                    $event->setPublicUrl($newPublicUrl);
                 }
-            }
-        }
-    }
-
-    /**
-     * @param GeneratePublicUrlForResourceEvent $event
-     * @param array $fileData
-     * @return void
-     */
-    protected function manipulatePublicUri($event, $fileData)
-    {
-        $publicUrl = $event->getPublicUrl();
-        if (!empty($publicUrl) && !empty($fileData['modDate'])) {
-            if (strpos($publicUrl, '?') === false) {
-                $event->setPublicUrl($publicUrl . '?v=' . $fileData['modDate']);
-            } else {
-                $event->setPublicUrl($publicUrl . '&v=' . $fileData['modDate']);
             }
         }
     }
@@ -124,5 +109,42 @@ class PublicFileUriListener
             'modDate' => $resourceObject->_getPropertyRaw('modification_date'),
             'extension' => $resourceObject->getExtension(),
         ];
+    }
+
+    /**
+     * @param string $fileTypesString Comma separated file types string
+     * @param array $fileData
+     * @param string $publicUrl
+     * @return string|null
+     */
+    protected function generateNewPublicUri($fileTypesString, $fileData, $publicUrl)
+    {
+        $newPublicUrl = '';
+        if (!empty($fileTypesString)) {
+            $fileTypes = explode(',', $fileTypesString);
+            if (in_array($fileData['extension'], $fileTypes, true)) {
+                $newPublicUrl = $this->manipulatePublicUri($publicUrl, $fileData);
+            }
+        } else {
+            $newPublicUrl = $this->manipulatePublicUri($publicUrl, $fileData);
+        }
+        return $newPublicUrl;
+    }
+
+    /**
+     * @param string $publicUrl
+     * @param array $fileData
+     * @return string|null
+     */
+    protected function manipulatePublicUri($publicUrl, $fileData)
+    {
+        if (!empty($publicUrl) && !empty($fileData['modDate'])) {
+            if (strpos($publicUrl, '?') === false) {
+                return $publicUrl . '?v=' . $fileData['modDate'];
+            } else {
+                return $publicUrl . '&v=' . $fileData['modDate'];
+            }
+        }
+        return null;
     }
 }
