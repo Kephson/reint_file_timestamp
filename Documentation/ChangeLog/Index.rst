@@ -11,6 +11,13 @@
 ChangeLog
 =========
 
+- **10.01.2022** -> 3.0.0
+
+  - full update to use with TYPO3 11.5
+  - completely switched from signal hooks to PSR-14 event listener
+
+-----------------------------------
+
 - **25.06.2020** -> 2.0.1
 
   - cleaned up coding

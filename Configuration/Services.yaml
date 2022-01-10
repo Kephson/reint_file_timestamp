@@ -1,0 +1,7 @@
+services:
+  RENOLIT\ReintFileTimestamp\EventListener\PublicFileUriListener:
+    tags:
+      - name: event.listener
+        identifier: 'file-timestamp-to-public-uri'
+        method: 'addTimestampToPublicUrl'
+        event: TYPO3\CMS\Core\Resource\Event\GeneratePublicUrlForResourceEvent
