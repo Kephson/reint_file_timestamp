@@ -35,7 +35,7 @@
     "source": "https://github.com/Kephson/reint_file_timestamp/archive/master.zip"
   },
   "require": {
-    "php": "^7.4",
+    "php": "^7.4 || ^8.0",
     "typo3/cms-core": ">=11.5, <12.0"
   },
   "autoload": {
