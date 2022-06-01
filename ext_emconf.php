@@ -12,7 +12,7 @@
 $EM_CONF[$_EXTKEY] = [
     'title' => 'Timestamp parameter in public file uri',
     'description' => 'Adds a parameter with the timestamp of last change to all public file uri to prevent browser from caching the file after update.',
-    'version' => '3.0.0',
+    'version' => '3.0.1',
     'category' => 'misc',
     'state' => 'stable',
     'uploadfolder' => false,

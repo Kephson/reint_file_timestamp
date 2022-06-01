@@ -11,6 +11,14 @@
 ChangeLog
 =========
 
+
+- **01.06.2022** -> 3.0.1
+
+  - added PHP 8 compatibility, thanks to jp1987
+  - updated documentation
+
+-----------------------------------
+
 - **10.01.2022** -> 3.0.0
 
   - full update to use with TYPO3 11.5
