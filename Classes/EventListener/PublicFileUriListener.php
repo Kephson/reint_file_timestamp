@@ -6,7 +6,7 @@ namespace RENOLIT\ReintFileTimestamp\EventListener;
  *
  *  Copyright notice
  *
- *  (c) 2022 Ephraim Härer <ephraim.haerer@renolit.com>, RENOLIT SE
+ *  (c) 2022-2024 Ephraim Härer <ephraim.haerer@renolit.com>, RENOLIT SE
  *
  *  All rights reserved
  *

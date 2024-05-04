@@ -12,21 +12,19 @@
 $EM_CONF[$_EXTKEY] = [
     'title' => 'Timestamp parameter in public file uri',
     'description' => 'Adds a parameter with the timestamp of last change to all public file uri to prevent browser from caching the file after update.',
-    'version' => '3.0.1',
+    'version' => '4.0.0',
     'category' => 'misc',
     'state' => 'stable',
-    'uploadfolder' => false,
-    'clearCacheOnLoad' => false,
-    'author' => 'Ephraim Härer',
-    'author_email' => 'ephraim.haerer@renolit.com',
-    'author_company' => 'RENOLIT SE',
     'constraints' => [
         'depends' => [
-            'typo3' => '11.5.0-11.5.99',
-            'extensionmanager' => '11.5.0-11.5.99',
+            'typo3' => '12.4.0-12.4.99',
+            'extensionmanager' => '12.4.0-12.4.99',
         ],
         'conflicts' => [],
         'suggests' => [],
     ],
+    'author' => 'Ephraim Härer',
+    'author_email' => 'ephraim.haerer@renolit.com',
+    'author_company' => 'RENOLIT SE',
 ];
 

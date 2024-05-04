@@ -45,3 +45,7 @@ Temporary Items
 # PHPStorm
 .idea
 .idea/*
+vendor
+bin
+.Build
+*.lock

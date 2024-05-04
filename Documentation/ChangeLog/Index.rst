@@ -12,6 +12,13 @@ ChangeLog
 =========
 
 
+- **03.05.2024** -> 4.0.0
+
+  - new version for TYPO3 12.4
+  - updated documentation
+
+-----------------------------------
+
 - **01.06.2022** -> 3.0.1
 
   - added PHP 8 compatibility, thanks to jp1987

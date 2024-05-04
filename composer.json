@@ -1,52 +1,69 @@
 {
-  "name": "renolit/reint-file-timestamp",
-  "description": "Timestamp parameter in public file uri",
-  "type": "typo3-cms-extension",
-  "homepage": "https://github.com/Kephson/reint_file_timestamp",
-  "readme": "README.md",
-  "license": [
-    "GPL-2.0-or-later"
-  ],
-  "keywords": [
-    "TYPO3",
-    "downloads",
-    "publicurl",
-    "url",
-    "uri",
-    "file",
-    "timestamp",
-    "caching",
-    "browser",
-    "Intranet",
-    "event",
-    "listener"
-  ],
-  "authors": [
-    {
-      "name": "Ephraim Härer",
-      "email": "ephraim.haerer@renolit.com",
-      "homepage": "https://www.renolit.com",
-      "role": "Developer"
-    }
-  ],
-  "support": {
-    "email": "ephraim.haerer@renolit.com",
-    "issues": "https://github.com/Kephson/reint_file_timestamp/issues",
-    "source": "https://github.com/Kephson/reint_file_timestamp/archive/master.zip"
-  },
-  "require": {
-    "php": "^7.4 || ^8.0",
-    "typo3/cms-core": ">=11.5, <12.0"
-  },
-  "autoload": {
-    "psr-4": {
-      "RENOLIT\\ReintFileTimestamp\\": "Classes"
-    }
-  },
-  "extra": {
-    "typo3/cms": {
-      "extension-key": "reint_file_timestamp"
-    }
-  }
+	"name": "renolit/reint-file-timestamp",
+	"description": "Timestamp parameter in public file uri",
+	"type": "typo3-cms-extension",
+	"homepage": "https://github.com/Kephson/reint_file_timestamp",
+	"readme": "README.md",
+	"license": [
+		"GPL-2.0-or-later"
+	],
+	"keywords": [
+		"TYPO3",
+		"downloads",
+		"publicurl",
+		"url",
+		"uri",
+		"file",
+		"timestamp",
+		"caching",
+		"browser",
+		"Intranet",
+		"event",
+		"listener"
+	],
+	"authors": [
+		{
+			"name": "Ephraim Härer",
+			"email": "ephraim.haerer@renolit.com",
+			"homepage": "https://www.renolit.com",
+			"role": "Developer"
+		}
+	],
+	"support": {
+		"email": "ephraim.haerer@renolit.com",
+		"issues": "https://github.com/Kephson/reint_file_timestamp/issues"
+	},
+	"require": {
+		"php": "^8.1",
+		"typo3/cms-core": "^12.4"
+	},
+	"require-dev": {
+		"ergebnis/composer-normalize": "^2.42"
+	},
+	"replace": {
+		"typo3-ter/reint-file-timestamp": "self.version"
+	},
+	"autoload": {
+		"psr-4": {
+			"RENOLIT\\ReintFileTimestamp\\": "Classes"
+		}
+	},
+	"config": {
+		"allow-plugins": {
+			"ergebnis/composer-normalize": true,
+			"typo3/class-alias-loader": true,
+			"typo3/cms-composer-installers": true
+		},
+		"bin-dir": ".Build/bin",
+		"sort-packages": true,
+		"vendor-dir": ".Build/vendor"
+	},
+	"extra": {
+		"typo3/cms": {
+			"cms-package-dir": "{$vendor-dir}/typo3/cms",
+			"extension-key": "reint_file_timestamp",
+			"web-dir": ".Build/public"
+		}
+	}
 }
 
